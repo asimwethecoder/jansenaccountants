@@ -2,7 +2,13 @@ import * as React from "react";
 import Image from "next/image";
 
 import { Section, Container } from "@/components/craft";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 
 import {
   Carousel,
@@ -45,13 +51,15 @@ const services = [
   },
 ];
 
-const FeatureSet = () => {
+const FeatureSet: React.FC = () => {
   return (
     <Section>
       <Container>
         <h2 className="!mt-0 mb-4">Our Services</h2>
         <p>
-          At Jansen Accountants, we offer a range of accounting services to help your business thrive. From financial reporting to tax planning, we provide expert guidance tailored to your needs.
+          At Jansen Accountants, we offer a range of accounting services to help
+          your business thrive. From financial reporting to tax planning, we
+          provide expert guidance tailored to your needs.
         </p>
         <Carousel className="mt-6 w-full">
           <CarouselContent className="-ml-1">
@@ -68,6 +76,7 @@ const FeatureSet = () => {
                       width={720}
                       height={480}
                       className="absolute inset-0 h-full w-full object-cover"
+                      loading="lazy"  // Lazy loading for better performance
                     />
                     <CardHeader className="relative z-10 bg-black bg-opacity-50 p-4 text-white">
                       <CardTitle>{service.title}</CardTitle>

@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 // Asset imports
 import Auditing from "@/public/auditing.jpg";
 
-const FeatureLeft = () => {
+const FeatureLeft: React.FC = () => {
   return (
     <Craft.Section>
       <Craft.Container className="grid items-stretch md:grid-cols-2 md:gap-12">
@@ -17,17 +17,18 @@ const FeatureLeft = () => {
           <Image
             src={Auditing}
             alt="Auditing services"
-            className="responsive4"
+            className="object-cover w-full h-full"  // Ensures image responsiveness
             width={1000}
             height={1000}
+            loading="lazy"  // Lazy load for performance improvement
           />
         </div>
         <div className="flex flex-col gap-6 py-8">
           <h3 className="!my-0">Expert Auditing Services</h3>
           <p className="font-light leading-[1.4] opacity-70">
-            Ensure your financial records are accurate and compliant with 
-            our professional auditing services. Our team delivers thorough 
-            audits that help identify risks and opportunities for improvement, 
+            Ensure your financial records are accurate and compliant with our
+            professional auditing services. Our team delivers thorough audits
+            that help identify risks and opportunities for improvement,
             providing you with clear insights into your financial health.
           </p>
           <div className="not-prose flex items-center gap-2">

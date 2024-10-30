@@ -24,18 +24,14 @@ const formSchema = z.object({
   }),
 });
 
-export function CTA() {
+export const CTA: React.FC = () => {
   // Define the form using React Hook Form and Zod for validation
-  const form =
-    useForm <
-    z.infer <
-    typeof formSchema >>
-      {
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-          email: "",
-        },
-      };
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+    },
+  });
 
   // Define a submit handler for the form
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -56,7 +52,7 @@ export function CTA() {
           At Jansen Accountants, we understand that your business needs reliable
           financial management to succeed. Our team of experienced professionals
           offers comprehensive services, including bookkeeping, tax planning,
-          auditing, and financial consulting. Whether your a startup looking for
+          auditing, and financial consulting. Whether you are a startup looking for
           guidance or an established company needing advanced financial
           strategies, we are here to help you achieve your business goals with
           precision and trust.

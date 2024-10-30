@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
 
-export default function ModeToggle() {
+const ModeToggle: React.FC = () => {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -14,7 +14,7 @@ export default function ModeToggle() {
   useEffect(() => setMounted(true), []);
 
   if (!mounted) {
-    // Render nothing on the server and until the theme is mounted
+    // Render nothing on the server until the theme is mounted
     return null;
   }
 
@@ -43,4 +43,6 @@ export default function ModeToggle() {
       )}
     </div>
   );
-}
+};
+
+export default ModeToggle;
