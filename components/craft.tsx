@@ -35,21 +35,13 @@ const Main = ({ children, className, id }: MainProps) => {
   return (
     <main
       className={cn(
-        // `Main` Specific Styles
         "max-w-none prose-p:m-0",
-        // General Prose
         "prose prose-neutral prose:font-sans dark:prose-invert xl:prose-lg",
-        // Prose Headings
         "prose-headings:font-normal",
-        // Prose Strong
         "prose-strong:font-semibold",
-        // Inline Links
         "prose-a:underline prose-a:decoration-primary/50 prose-a:underline-offset-2 prose-a:text-foreground/75 prose-a:transition-all",
-        // Inline Link Hover
         "hover:prose-a:decoration-primary hover:prose-a:text-foreground",
-        // Blockquotes
         "prose-blockquote:not-italic",
-        // Pre and Code Blocks
         "prose-pre:border prose-pre:bg-muted/25 prose-pre:text-foreground",
         className
       )}
@@ -108,21 +100,13 @@ const Article = ({
     <article
       dangerouslySetInnerHTML={dangerouslySetInnerHTML}
       className={cn(
-        // General Prose
         "prose prose-neutral prose:font-sans dark:prose-invert xl:prose-lg",
-        // Prose Headings
         "prose-headings:font-normal",
-        // Prose Paragraphs
         "prose-p:mb-0",
-        // Prose Strong
         "prose-strong:font-semibold",
-        // Inline Links
         "prose-a:underline prose-a:decoration-primary/50 prose-a:underline-offset-2 prose-a:text-foreground/75 prose-a:transition-all",
-        // Inline Link Hover
         "hover:prose-a:decoration-primary hover:prose-a:text-foreground",
-        // Blockquotes
         "prose-blockquote:not-italic",
-        // Pre and Code Blocks
         "prose-pre:border prose-pre:bg-muted/25",
         className
       )}
@@ -157,18 +141,21 @@ const Flex = React.memo(
     const gapClasses = (g: number) => `gap-${g}`;
     const paddingClasses = (p: number) => `p-${p}`;
 
-    const responsiveClasses = (
-      prop: Responsive<any>,
-      classFn: (value: any) => string
+    // Allow flexible typing for responsive props
+    const responsiveClasses = <T,>(
+      prop: Responsive<T>,
+      classFn: (value: T) => string
     ) => {
-      if (typeof prop !== "object") return classFn(prop);
-      return Object.entries(prop)
-        .map(([breakpoint, value]) =>
-          breakpoint === "sm"
-            ? classFn(value)
-            : `${breakpoint}:${classFn(value)}`
-        )
-        .join(" ");
+      if (typeof prop === "object" && prop !== null) {
+        return Object.entries(prop)
+          .map(([breakpoint, value]) =>
+            breakpoint === "sm"
+              ? classFn(value as T)
+              : `${breakpoint}:${classFn(value as T)}`
+          )
+          .join(" ");
+      }
+      return classFn(prop as T);
     };
 
     return (
@@ -216,18 +203,20 @@ const Grid = React.memo(
 
     const gapClasses = (g: number) => `gap-${g}`;
 
-    const responsiveClasses = (
-      prop: Responsive<number>,
-      classFn: (n: number) => string
+    const responsiveClasses = <T,>(
+      prop: Responsive<T>,
+      classFn: (value: T) => string
     ) => {
-      if (typeof prop === "number") return classFn(prop);
-      return Object.entries(prop)
-        .map(([breakpoint, value]) =>
-          breakpoint === "sm"
-            ? classFn(value)
-            : `${breakpoint}:${classFn(value)}`
-        )
-        .join(" ");
+      if (typeof prop === "object" && prop !== null) {
+        return Object.entries(prop)
+          .map(([breakpoint, value]) =>
+            breakpoint === "sm"
+              ? classFn(value as T)
+              : `${breakpoint}:${classFn(value as T)}`
+          )
+          .join(" ");
+      }
+      return classFn(prop as T);
     };
 
     return (
